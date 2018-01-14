@@ -1,3 +1,5 @@
 <?php
 
-class StandaloneBladeException extends Exception {}
+namespace Mejta;
+
+class StandaloneBladeException extends \Exception {}

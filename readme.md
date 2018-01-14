@@ -3,6 +3,17 @@
 This project provide Blade as a standalone library that works with 5.x Laravel Blade.
 See documentation on [https://laravel.com/docs/5.5/blade](https://laravel.com/docs/5.5/blade)
 
+## Compatible with
+
+- PHP >= 7.0
+- Laravel Blade 5.5.x
+
+## Instalation
+
+```bash
+composer require mejta/standalone-blade
+```
+
 ## Usage
 
 ```php
@@ -16,14 +27,20 @@ $cacheDir = __DIR__ . '/cache';
 
 $engine = new StandaloneBlade($viewDirs, $cacheDir);
 
-$engine->compiler->directive('datetime', function($expression) {
+// Define custom directives
+$engine->directive('datetime', function($expression) {
     return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
 });
 
-$engine->compiler->if('env', function($environment) {
+// Define custom if statements
+$engine->if('env', function($environment) {
     return app()->environment($environment);
 });
 
+// Share variables with all templates
+$engine->share('key', 'value');
+
+// Render template
 echo $engine->render('page-template', [
     'title' => 'Page title',
     'content' => 'Some example page content',

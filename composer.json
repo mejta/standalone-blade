@@ -3,9 +3,6 @@
     "type": "project",
     "keywords": ["laravel", "blade"],
     "license": "MIT",
-    "require": {
-        "illuminate/view": "~5"
-    },
     "authors": [
         {
             "name": "Daniel Mejta",
@@ -15,6 +12,18 @@
     "autoload": {
         "psr-4": {
             "Mejta\\": "src"
-        }
+        },
+        "classmap": [
+            "src/"
+        ]
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap vendor/autoload.php tests/*"
+    },
+    "require": {
+        "illuminate/view": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6"
     }
 }

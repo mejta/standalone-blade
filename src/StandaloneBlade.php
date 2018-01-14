@@ -24,6 +24,10 @@ class StandaloneBlade {
     private $dispatcher;
     private $factory;
 
+    public static $checks = [];
+
+    private $shares = [];
+
     public function __construct(array $views, string $cache) {
 
         if(!file_exists($cache))
@@ -38,13 +42,6 @@ class StandaloneBlade {
         $this->views = $views;
         
         $this->boot();
-    }
-
-    public function __get($name) {
-        if($name === 'compiler')
-            return $this->compiler;
-
-        return null;
     }
 
     private function boot() {
@@ -69,7 +66,38 @@ class StandaloneBlade {
         $this->factory = new Factory($this->resolver, $this->finder, $this->dispatcher);
     }
 
-    public function render($template, $data) {
-        return $this->factory->make($template, $data)->render();
+    public function directive($directive, $callback) {
+        $this->compiler->directive($directive, $callback);
+    }
+
+    public function if($if, $check) {
+        self::$checks[$if] = $check;
+
+        $this->compiler->directive($if, function($expression) use ($if, $check) {
+            return "<?php if(\\" . self::class . "::check('$if', $expression)): ?>";
+        });
+        
+        $this->compiler->directive("else$if", function($expression) use ($if, $check) {
+            return "<?php elseif(\\" . self::class . "::check('$if', $expression)): ?>";
+        });
+        
+        $this->compiler->directive("end$if", function() {
+            return "<?php endif; ?>";
+        });
+    }
+
+    public static function check($if, $value) {
+        return self::$checks[$if]($value);
+    }
+    
+    public function share($key, $value) {
+        $this->shares[$key] = $value;
+    }
+
+    public function render(string $template, array $data = []) {
+        return $this
+            ->factory
+            ->make($template, array_merge_recursive($this->shares, $data))
+            ->render();
     }
 }
