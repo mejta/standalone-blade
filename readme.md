@@ -1,7 +1,7 @@
 # Standalone Laravel Blade template engine
 
 This project provide Blade as a standalone library that works with 5.x Laravel Blade.
-See documentation on (https://laravel.com/docs/5.5/blade)[https://laravel.com/docs/5.5/blade]
+See documentation on [https://laravel.com/docs/5.5/blade](https://laravel.com/docs/5.5/blade)
 
 ## Usage
 
@@ -21,7 +21,7 @@ $engine->compiler->directive('datetime', function($expression) {
 });
 
 $engine->compiler->if('env', function($environment) {
-    return $environment === 'development';
+    return app()->environment($environment);
 });
 
 echo $engine->render('page-template', [
