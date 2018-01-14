@@ -1,0 +1,20 @@
+{
+    "name": "mejta/standalone-blade",
+    "type": "project",
+    "keywords": ["laravel", "blade"],
+    "license": "MIT",
+    "require": {
+        "illuminate/view": "~5"
+    },
+    "authors": [
+        {
+            "name": "Daniel Mejta",
+            "email": "daniel@mejta.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mejta\\": "src"
+        }
+    }
+}
