@@ -116,7 +116,7 @@ final class StandaloneBladeTest extends TestCase
     }
 
     private function mkdir($dirPath) {
-        mkdir($dirPath, 0644, true);
+        mkdir($dirPath, 0777, true);
     }
 
     private function rmdir($dirPath) {

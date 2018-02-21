@@ -1,12 +1,12 @@
 # Standalone Laravel Blade template engine
 
-This project provide Blade as a standalone library that works with 5.x Laravel Blade.
+This project provide Blade as a standalone library that works with 5.6 Laravel Blade.
 See blade documentation: [https://laravel.com/docs/5.5/blade](https://laravel.com/docs/5.5/blade)
 
 ## Compatible with
 
-- PHP >= 7.0
-- Laravel Blade 5.5.x
+- PHP >= 7.1
+- Laravel Blade 5.6.x
 
 ## Instalation
 
