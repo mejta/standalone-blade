@@ -1,6 +1,6 @@
 {
     "name": "mejta/standalone-blade",
-    "type": "project",
+    "type": "library",
     "keywords": ["laravel", "blade"],
     "license": "MIT",
     "authors": [
